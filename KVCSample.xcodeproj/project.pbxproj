@@ -19,6 +19,7 @@
 		5B5A57F618F69C2000F5EB28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B5A57DE18F69C2000F5EB28 /* UIKit.framework */; };
 		5B5A57FE18F69C2000F5EB28 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5B5A57FC18F69C2000F5EB28 /* InfoPlist.strings */; };
 		5B5A580018F69C2000F5EB28 /* KVCSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A57FF18F69C2000F5EB28 /* KVCSampleTests.m */; };
+		5B5A580B18F69CB200F5EB28 /* ObjectA.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5A580A18F69CB200F5EB28 /* ObjectA.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,8 @@
 		5B5A57FB18F69C2000F5EB28 /* KVCSampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KVCSampleTests-Info.plist"; sourceTree = "<group>"; };
 		5B5A57FD18F69C2000F5EB28 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5B5A57FF18F69C2000F5EB28 /* KVCSampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVCSampleTests.m; sourceTree = "<group>"; };
+		5B5A580918F69CB200F5EB28 /* ObjectA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectA.h; sourceTree = "<group>"; };
+		5B5A580A18F69CB200F5EB28 /* ObjectA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectA.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +114,8 @@
 				5B5A57EA18F69C2000F5EB28 /* AppDelegate.m */,
 				5B5A57EC18F69C2000F5EB28 /* Images.xcassets */,
 				5B5A57E118F69C2000F5EB28 /* Supporting Files */,
+				5B5A580918F69CB200F5EB28 /* ObjectA.h */,
+				5B5A580A18F69CB200F5EB28 /* ObjectA.m */,
 			);
 			path = KVCSample;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 			files = (
 				5B5A57EB18F69C2000F5EB28 /* AppDelegate.m in Sources */,
 				5B5A57E718F69C2000F5EB28 /* main.m in Sources */,
+				5B5A580B18F69CB200F5EB28 /* ObjectA.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

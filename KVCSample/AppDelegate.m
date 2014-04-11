@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "ObjectA.h"
+#import <objc/runtime.h>
 
 @implementation AppDelegate
 
@@ -15,8 +17,70 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    UIViewController *vc = [[UIViewController alloc] init];
+    [self.window setRootViewController:vc];
     [self.window makeKeyAndVisible];
+    [self testKVC];
     return YES;
+}
+
+- (void)testKVC
+{
+    ObjectA *objA = [[ObjectA alloc] init];
+    [objA setValue:@"testA" forKey:@"stringA"];
+    [objA setValue:@1 forKey:@"integerA"];
+    [objA setValue:@"novisString" forKey:@"novisStringC"];
+    //objA stringInstanceA (null), integerInstanceA 0, stringA testA, integerA 1 novisStringC novisString
+    NSLog(@"objA %@", objA);
+    
+    
+    [objA setValue:@"testInstanceA" forKey:@"stringInstanceA"];
+    [objA setValue:@2 forKey:@"integerInstanceA"];
+    //objA stringInstanceA testInstanceA, integerInstanceA 2, stringA testA, integerA 1 novisStringC novisString
+    NSLog(@"objA %@", objA);
+    
+    //当把一个nil设置到一个非对象的属性或者变量上的时候，会调用方法setNilValueForKey
+    [objA setValue:nil forKey:@"integerInstanceA"];
+    
+    NSLog(@">>>>>>>>>>>>>>>>>>>>>> 测试数组");
+    
+    NSArray *objArray = @[[[ObjectA alloc] init],[[ObjectA alloc] init],[[ObjectA alloc] init]];
+    [objArray setValue:@"array_string" forKey:@"stringA"];
+    NSLog(@"objArray %@", objArray);
+    
+    id values = [objArray valueForKey:@"stringA"];
+    NSLog(@"values %@", values);
+    
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    NSLog(@"////////////////////////////////////////////////////////////////////////////////////////////////");
+    NSLog(@"kvo test");
+    
+    [objA addObserver:self forKeyPath:@"stringA" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
+    
+    objA.stringA = @"sssinn";
+    
+    //下面这句话不会引起KVO，因为直接修改的变量
+    [objA changeStringAValue:@"dddinn"];
+    
+    [objA removeObserver:self forKeyPath:@"stringA"];
+    
+    
+    
+    [objA addObserver:self forKeyPath:@"stringInstanceA" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
+    
+    //下面这句话不会引起KVO，因为直接修改的变量
+    [objA changeStringInstanceAValue:@"change1"];
+    //下面这句话会引起KVO，因为通过KVC
+    [objA setValue:@"change2" forKey:@"stringInstanceA"];
+    
+    [objA removeObserver:self forKeyPath:@"stringInstanceA"];
+    
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    NSLog(@"keyPath %@  change %@", keyPath, change);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
